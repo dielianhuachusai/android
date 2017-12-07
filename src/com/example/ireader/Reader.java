@@ -36,11 +36,33 @@ public class Reader extends FragmentActivity {
 		String path=intent.getStringExtra("path");
 		filepath=path;
 		((TextView)findViewById(R.id.readerTitle)).setText((new File(path)).getName());
+		final TextView currentPageNumTV=(TextView)findViewById(R.id.pageNum);
 		int pageNum=intent.getIntExtra("pageNum",0);
 		Log.d("Item","Path:"+path);
 		Log.d("LoadItemPageNum", Integer.toString(pageNum));
+		
 		if(bAdapter.setArgs(path, pageNum, getApplication())){
 			pageView.setAdapter(bAdapter);
+			pageView.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+				
+				@Override
+				public void onPageSelected(int pos) {
+					// TODO Auto-generated method stub
+					currentPageNumTV.setText("第"+pos+"页");
+				}
+				
+				@Override
+				public void onPageScrolled(int arg0, float arg1, int arg2) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void onPageScrollStateChanged(int arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			pageView.setCurrentItem(pageNum);
 			Log.d("SetReader", "设置ViewPager成功");
 		}
