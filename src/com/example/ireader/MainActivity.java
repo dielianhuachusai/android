@@ -75,6 +75,7 @@ public class MainActivity extends Activity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
+				//长按来显示或者隐藏删除图标
 				if(isShowDelete){
 					isShowDelete=false;
 					txtItem.setIsShowDelete(isShowDelete);
@@ -83,7 +84,7 @@ public class MainActivity extends Activity {
 					txtItem.setIsShowDelete(isShowDelete);
 				}
 				// TODO Auto-generated method stub
-				return false;
+				return true;
 			}
 		});
 //        txtItem=new TxtItem(this, list);
@@ -115,6 +116,10 @@ public class MainActivity extends Activity {
     				//如果路径存在则插入数据
     				if(path!=null){
     					File file=new File(path);
+    					if(!file.exists()){
+    						Toast.makeText(getApplicationContext(), "文件不存在",0).show();
+    						return;
+    					}
     					String name=file.getName();
     					Log.d("File","File path:"+path);
     					Log.d("File", "File name:"+name);

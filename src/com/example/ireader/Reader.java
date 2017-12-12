@@ -48,7 +48,7 @@ public class Reader extends FragmentActivity {
 				@Override
 				public void onPageSelected(int pos) {
 					// TODO Auto-generated method stub
-					currentPageNumTV.setText("第"+pos+"页");
+					currentPageNumTV.setText("第"+(pos+1)+"页");
 				}
 				
 				@Override

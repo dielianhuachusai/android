@@ -4,6 +4,9 @@ import java.net.ContentHandler;
 import java.util.List;
 
 import android.content.Context;
+import android.database.sqlite.*;
+import android.provider.OpenableColumns;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +66,14 @@ public class TxtItem extends BaseAdapter {
 				@Override
 				public void onClick(View arg0) {
 					// TODO Auto-generated method stub
+					//点击删除图标删除Item
+					try{
+						SQLiteDatabase sql = SQLiteDatabase.openOrCreateDatabase("/data/data/com.example.ireader/databases/test.db", null);
+						sql.delete("book", "path=?",  new String[]{list.get(pos).path});
+					}
+					catch(SQLiteException e){
+						Log.e("SqliteERR", e.getMessage());
+					}
 					list.remove(pos);
 					setIsShowDelete(false);
 					
